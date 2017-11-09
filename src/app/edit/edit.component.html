@@ -1,0 +1,28 @@
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" >
+  <div class="form-group">
+    <label for="exampleInputEmail1">Edit Question:</label>
+    <textarea class="form-control" id="question" formControlName="question"></textarea>
+  </div>
+  <br>
+  <label for="exampleInputEmail1">Edit Options: </label>
+  
+  <div formArrayName ="optionValueList">     
+    <div class="form-group" *ngFor="let optionControl of questionForm.get('optionValueList').controls; let i = index">
+      <div [formGroupName] = "i">
+        <div class = "form-check">
+          <span class="input-options-addon">
+            <input type="radio" class = "form-check-input" name = "optionSelect" [value]="true" formControlName="optionSelect"           
+            (click)="onRadioClick(optionControl)">   
+          </span>                  
+          <input type="text" class="form-check-text" formControlName="optionValue">
+          <span class="glyphicon glyphicon-minus" aria-hidden="true" (click)="onRemove(i)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="onAddTextBox()">Add Options</button>
+  <hr>
+  <button type="Submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+</form>
+
+

@@ -1,0 +1,51 @@
+<!-- <form [formGroup]="questionForm" (ngSubmit)="onSubmitForm()" >
+  <div class="form-group">
+    <label for="exampleInputEmail1">Enter Question:</label>
+    <textarea class="form-control" id="question" formControlName="question"></textarea>
+  </div>
+  <br>
+  <label for="exampleInputEmail1">Enter Options: </label>
+  <div class="row"> 
+      <div class="col-lg-6" *ngFor="let text of textBoxes">
+          <div class="input-group">
+              <span class="input-group-addon">
+                  <input type="radio" name="text" value="value 1" [formControlName]="text"/>
+              </span>
+              <input type="text" name="text" class="form-control" [formControlName]="text"/>
+          </div>
+      </div>    
+  </div>
+  <button type="button" class="btn btn-primary btn-sm" (click)="onAddTextBox()">Add More Options</button>
+  <hr>
+  <button type="Submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+</form> -->
+
+<form [formGroup]="questionForm" (ngSubmit)="onSubmitForm()" >
+    <div class="form-group">
+      <label for="exampleInputEmail1">Enter Question:</label>
+      <textarea class="form-control" id="question" formControlName="question"></textarea>
+    </div>
+    <br>
+    <label for="exampleInputEmail1">Enter Options: </label>
+    <div formArrayName ="optionValueList">     
+        <div class="form-group" *ngFor="let optionControl of questionForm.get('optionValueList').controls; let i = index">
+            <div [formGroupName] = "i">
+                <div class = "form-check">
+                    <span class="input-options-addon">
+                      <input type="radio" class = "form-check-input" name = "optionSelect" formControlName="optionSelect"
+                      (click)="onRadioClick(optionControl)">   
+                    </span>                  
+                    <input type="text" class="form-check-text" formControlName="optionValue">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true" (click)="onRemove(i)"></span>
+                </div>
+              </div>
+        </div> 
+    </div>   
+    <button type="button" class="btn btn-primary" (click)="onAddTextBox()">Add Options</button>
+    <hr>
+    <button type="Submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+    <span 
+    *ngIf="!questionForm.get('optionValueList').valid && submitCounter>0" 
+    class="help-block">Please Enter the question and atleast one option!!</span>
+ 
+  </form>

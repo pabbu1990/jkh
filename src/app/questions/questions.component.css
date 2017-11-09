@@ -1,0 +1,13 @@
+.glyphicon-edit{
+    cursor: pointer;
+}
+
+.pagination{
+    text-align: center;
+    margin-left: 143px;
+}
+#page-number{
+    max-width: 44.8px;
+    min-width: 44.8px;
+    text-align: center;
+}
