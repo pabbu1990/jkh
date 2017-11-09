@@ -15,6 +15,8 @@ import 'rxjs/add/operator/map';
 export class QuestionsComponent implements OnInit {
   pageSize = 10;
   questions: Question[];
+  filteredStatus = '';
+  sort = 'Desc';
   
   constructor(private pagerService: PagerService, private serverService: ServerService, private route: Router) { }
 
@@ -52,6 +54,15 @@ export class QuestionsComponent implements OnInit {
       this.questions = this.serverService.questions;
       this.allItems = this.serverService.questions;
       this.setPage(1);
+    }
+  }
+
+  onSort(){
+    if(this.sort=='Desc'){
+      this.sort = 'Asc';
+    }
+    else{
+      this.sort='Desc'
     }
   }
 

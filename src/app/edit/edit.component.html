@@ -7,7 +7,7 @@
   <label for="exampleInputEmail1">Edit Options: </label>
   
   <div formArrayName ="optionValueList">     
-    <div class="form-group" *ngFor="let optionControl of questionForm.get('optionValueList').controls; let i = index">
+    <div class="form-group" *ngFor="let optionControl of questionForm.get('optionValueList')['controls']; let i = index">
       <div [formGroupName] = "i">
         <div class = "form-check">
           <span class="input-options-addon">

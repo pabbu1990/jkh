@@ -13,6 +13,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PagerService} from './pager.service';
 import { EditComponent } from './edit/edit.component';
+import { FilterPipe } from './filter.pipe';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { EditComponent } from './edit/edit.component';
     HeaderComponent,
     QuestionsComponent,
     NewComponent,
-    EditComponent
+    EditComponent,
+    FilterPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,

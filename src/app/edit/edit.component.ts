@@ -40,6 +40,7 @@ export class EditComponent implements OnInit {
   }
 
   onAddTextBox(){
+    console.log(this.questionForm.get('optionValueList'));
     const option = new FormGroup({
       optionSelect : new FormControl(null),
       optionValue : new FormControl(null)
@@ -65,6 +66,7 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.questionForm.get('optionValueList'));
     this.submitCounter++;
     if(this.questionForm.get('optionValueList').valid){
       var question = this.questionForm.value.question;

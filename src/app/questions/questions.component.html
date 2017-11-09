@@ -1,9 +1,22 @@
 
-<button type="button" class="btn btn-primary btn-lg btn-block" routerLink="new">Add Question</button>
-<div class="page-header">
-    <h1>Questions: </h1>
-  </div>
-    <div class="panel panel-default" *ngFor="let question of pagedItems">
+<input class=" search-box pull-right" type="text" placeholder="Search" [(ngModel)]="filteredStatus" >
+
+    <button type="button pull-left" class="btn btn-primary" routerLink="new">Add Question</button>
+    <hr>
+    
+    <div class="panel panel-primary">
+            <div class="panel-heading clearfix">
+              <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Panel header</h4>
+              <div class="btn-group pull-right">
+                    <label>Sort By: </label>
+                    <a (click)="onSort()" class="btn btn-default btn-sm pull-right">{{sort}}</a>
+                    <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                <!-- 
+                <a href="#" class="btn btn-default btn-sm">## Delete</a>
+                <a href="#" class="btn btn-default btn-sm">## Move</a> -->
+              </div>
+            </div>
+    <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort | filter: filteredStatus">
         <!-- ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize" -->
         <div class="panel-heading">{{question.num}}. {{question.question}} <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true" (click)=onEdit(question)></span></div>
         <div class="panel-body">
@@ -11,6 +24,7 @@
                 <label><input type = "radio" disabled = "true" [value]="true" [(ngModel)]="option.isCorrect"> {{option.oValue}}</label>
             </div>
         </div>
+      </div>
       </div>
 
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">

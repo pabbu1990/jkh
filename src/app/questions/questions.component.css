@@ -11,3 +11,16 @@
     min-width: 44.8px;
     text-align: center;
 }
+
+.header-text{
+    display: inline-block;
+}
+
+.glyphicon{
+    margin-top: 6px;
+}
+
+.glyphicon.glyphicon-edit{
+    color: #337ab7;
+}
+

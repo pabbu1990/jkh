@@ -16,7 +16,7 @@ export class ServerService {
     
     getQuestions() {
       console.log('Get service called');
-        return this.http.get('https://fullstackproject-cloned-kiranpabbu.c9users.io/questions')
+        return this.http.get('https://sheltered-beyond-55362.herokuapp.com/questions')
           .map(
             (response: Response) => {
                 console.log(response.json());
@@ -45,7 +45,7 @@ export class ServerService {
       addQuestion(question: any) {
         this.callService = true;
         console.log('body'+JSON.stringify(question));
-        return this.http.post('https://fullstackproject-cloned-kiranpabbu.c9users.io/new', JSON.stringify(question), this.getHeader()).
+        return this.http.post('https://sheltered-beyond-55362.herokuapp.com/new', JSON.stringify(question), this.getHeader()).
         map((response: Response)=> {
           return response;
         })
@@ -64,7 +64,7 @@ export class ServerService {
         console.log('body'+JSON.stringify(submQuestion));  
         console.log(id); 
         this.callService = true;
-        return this.http.put('https://fullstackproject-cloned-kiranpabbu.c9users.io/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
+        return this.http.put('https://sheltered-beyond-55362.herokuapp.com/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
         map((response: Response)=> {
           console.log("serverservice edit method"+response.status);
           return response.status;
