@@ -12,12 +12,14 @@ export class FilterPipe implements PipeTransform {
     }
     const resultArray = [];
     for(const cons of value){
+      var isPosted = false;
       if(cons['question'].includes(filterString)){
         resultArray.push(cons);
+        isPosted = true;
       }
       for(const opt of cons['options'])
       {
-        if(opt['oValue'].includes(filterString)){
+        if(opt['oValue'].includes(filterString) && !isPosted){
           resultArray.push(cons);
         }
       }
