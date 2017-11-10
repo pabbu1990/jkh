@@ -1,3 +1,8 @@
 .btn-primary{
     margin-left: 20px;
 }
+
+.help-block{
+    color: red;
+    text-align: center;
+}

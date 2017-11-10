@@ -17,6 +17,7 @@ export class QuestionsComponent implements OnInit {
   questions: Question[];
   filteredStatus = '';
   sort = 'Desc';
+  pageLoad = false;
   
   constructor(private pagerService: PagerService, private serverService: ServerService, private route: Router) { }
 
@@ -47,10 +48,12 @@ export class QuestionsComponent implements OnInit {
           // initialize to page 1
           this.setPage(1);
           this.serverService.callService = false;
+          this.pageLoad = true;
         }
       );
     }
     else{
+      this.pageLoad = true;
       this.questions = this.serverService.questions;
       this.allItems = this.serverService.questions;
       this.setPage(1);

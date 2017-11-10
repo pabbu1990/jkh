@@ -1,23 +1,19 @@
 
 <input class=" search-box pull-right" type="text" placeholder="Search" [(ngModel)]="filteredStatus" >
 
-    <button type="button pull-left" class="btn btn-primary" routerLink="new">Add Question</button>
+    <button type="button" class="btn btn-primary" routerLink="new">Add Question</button>
     <hr>
     
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" *ngIf="pageLoad">
             <div class="panel-heading clearfix">
-              <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Panel header</h4>
-              <div class="btn-group pull-right">
-                    <label>Sort By: </label>
-                    <a (click)="onSort()" class="btn btn-default btn-sm pull-right">{{sort}}</a>
+              <h4 class="panel-title pull-left">Questions</h4>
+              <div class="pull-right">
+                    <label>Sort: </label>
+                    <button type="button"  class="btn btn-default btn-xs" (click)="onSort()">{{sort}}</button>
                     <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-                <!-- 
-                <a href="#" class="btn btn-default btn-sm">## Delete</a>
-                <a href="#" class="btn btn-default btn-sm">## Move</a> -->
               </div>
             </div>
     <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort | filter: filteredStatus">
-        <!-- ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize" -->
         <div class="panel-heading">{{question.num}}. {{question.question}} <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true" (click)=onEdit(question)></span></div>
         <div class="panel-body">
               <div *ngFor="let option of question.options">

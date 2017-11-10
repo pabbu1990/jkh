@@ -2,11 +2,15 @@
     margin-left: 20px;
 }
 
-.help-block{
+/* .help-block{
     margin-left: 180px;
     margin-top: 40px;
-}
+} */
 
 .search-box{
     top: 0; right: 0;
+}
+.help-block{
+    color: red;
+    text-align: center;
 }

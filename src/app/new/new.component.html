@@ -42,10 +42,10 @@
         </div> 
     </div>   
     <button type="button" class="btn btn-primary" (click)="onAddTextBox()">Add Options</button>
+    <br>
+    <span 
+    *ngIf="!helpBlock && submitCounter>0" 
+    class="help-block">Please enter the question and choose at least one option!!</span>
     <hr>
     <button type="Submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-    <span 
-    *ngIf="!questionForm.get('optionValueList').valid && submitCounter>0" 
-    class="help-block">Please Enter the question and atleast one option!!</span>
- 
   </form>

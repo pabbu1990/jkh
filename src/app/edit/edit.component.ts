@@ -17,6 +17,7 @@ export class EditComponent implements OnInit {
   questionForm: FormGroup;
   submitCounter: number;
   selectedAnswer: number;
+  helpBlock = false;
   constructor(private server: ServerService, private router: Router) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class EditComponent implements OnInit {
     this.submitCounter = 0;
     console.log('recieved: '+JSON.stringify(this.question.options));
       this.questionForm = new FormGroup({
-        'question' : new FormControl(this.question.question),
+        'question' : new FormControl(this.question.question, Validators.required),
         'optionValueList' : new FormArray([])
         });
         for(var k=0; k<this.question.options.length; k++){
@@ -68,7 +69,9 @@ export class EditComponent implements OnInit {
   onSubmit(){
     console.log(this.questionForm.get('optionValueList'));
     this.submitCounter++;
-    if(this.questionForm.get('optionValueList').valid){
+    if(this.questionForm.get('question').valid && 
+    this.questionForm.get('optionValueList').valid){
+      this.helpBlock = true;
       var question = this.questionForm.value.question;
       var id = this.question.id;
       var options = [];
@@ -95,6 +98,7 @@ export class EditComponent implements OnInit {
       this.server.submitEdit(submitQuestion, id).subscribe((resStatus)=>{
         console.log('editcomponent'+resStatus);
           if(resStatus===200){
+            console.log('navigating to get page from edit');
             this.router.navigate(['/']);
           }
           

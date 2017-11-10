@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ServerService} from "../server.service";
 import {Validators,FormControl, FormGroup, FormArray, NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
-import {isNull, isUndefined} from "util";
+import {isNull, isNullOrUndefined, isUndefined} from "util";
 
 @Component({
   selector: 'app-new',
@@ -15,11 +15,12 @@ export class NewComponent implements OnInit {
   questionForm: FormGroup;
   submitCounter: number;
   selectedAnswer;
+  helpBlock = false;
   constructor(private serverService: ServerService, private router: Router ) { }
 
   ngOnInit() {   
     this.questionForm = new FormGroup({
-    'question' : new FormControl(null),
+    'question' : new FormControl(null, Validators.required),
     'optionValueList' : new FormArray([])
     })
     this.submitCounter = 0;
@@ -48,7 +49,11 @@ export class NewComponent implements OnInit {
 
   onSubmitForm(){
     this.submitCounter++;
-    if(this.questionForm.get('optionValueList').valid){
+    console.log(this.questionForm.get('optionValueList'));
+    if(this.questionForm.get('optionValueList').valid && !isNullOrUndefined(this.selectedAnswer)
+        && this.questionForm.get('question').valid){
+      this.helpBlock = true;
+      console.log((<FormArray>this.questionForm.get('optionValueList')).length);
       var question = this.questionForm.value.question;
       
       var options = [];

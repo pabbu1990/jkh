@@ -28,7 +28,7 @@ export class ServerService {
                     question.question,
                     question.options,
                     question._id)
-                );
+                );               
                 this.num++;
               }
     
