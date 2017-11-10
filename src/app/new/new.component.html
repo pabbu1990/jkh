@@ -1,25 +1,3 @@
-<!-- <form [formGroup]="questionForm" (ngSubmit)="onSubmitForm()" >
-  <div class="form-group">
-    <label for="exampleInputEmail1">Enter Question:</label>
-    <textarea class="form-control" id="question" formControlName="question"></textarea>
-  </div>
-  <br>
-  <label for="exampleInputEmail1">Enter Options: </label>
-  <div class="row"> 
-      <div class="col-lg-6" *ngFor="let text of textBoxes">
-          <div class="input-group">
-              <span class="input-group-addon">
-                  <input type="radio" name="text" value="value 1" [formControlName]="text"/>
-              </span>
-              <input type="text" name="text" class="form-control" [formControlName]="text"/>
-          </div>
-      </div>    
-  </div>
-  <button type="button" class="btn btn-primary btn-sm" (click)="onAddTextBox()">Add More Options</button>
-  <hr>
-  <button type="Submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-</form> -->
-
 <form [formGroup]="questionForm" (ngSubmit)="onSubmitForm()" >
     <div class="form-group">
       <label for="exampleInputEmail1">Enter Question:</label>

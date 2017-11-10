@@ -43,9 +43,7 @@ export class QuestionsComponent implements OnInit {
       .subscribe(
         (questions: Question[])=> {
           this.questions = questions;
-          console.log(questions);
           this.allItems = questions;         
-          // initialize to page 1
           this.setPage(1);
           this.serverService.callService = false;
           this.pageLoad = true;
@@ -83,7 +81,6 @@ export class QuestionsComponent implements OnInit {
 
 onEdit(ques: any){
   this.route.navigate(['/edit']);
-  console.log(ques);
   this.serverService.onEdit(ques);
 
   }

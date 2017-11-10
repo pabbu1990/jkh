@@ -19,7 +19,7 @@ export class ServerService {
         return this.http.get('https://sheltered-beyond-55362.herokuapp.com/questions')
           .map(
             (response: Response) => {
-                console.log(response.json());
+              console.log(response.json());
               const me = response.json();
               this.num = 1;
               for (let question of me) {
@@ -44,7 +44,6 @@ export class ServerService {
 
       addQuestion(question: any) {
         this.callService = true;
-        console.log('body'+JSON.stringify(question));
         return this.http.post('https://sheltered-beyond-55362.herokuapp.com/new', JSON.stringify(question), this.getHeader()).
         map((response: Response)=> {
           return response;
@@ -61,12 +60,9 @@ export class ServerService {
       }
 
       submitEdit(submQuestion: any, id: any) {
-        console.log('body'+JSON.stringify(submQuestion));  
-        console.log(id); 
         this.callService = true;
         return this.http.put('https://sheltered-beyond-55362.herokuapp.com/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
         map((response: Response)=> {
-          console.log("serverservice edit method"+response.status);
           return response.status;
         })
           .catch(

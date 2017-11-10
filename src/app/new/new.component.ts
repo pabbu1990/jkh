@@ -34,12 +34,10 @@ export class NewComponent implements OnInit {
        optionValue : new FormControl(null, Validators.required)
      });
     (<FormArray>this.questionForm.get('optionValueList')).push(option);
-    console.log( (<FormArray>this.questionForm.get('optionValueList')));
   }
 
   onRadioClick(optC: any){
     this.selectedAnswer=optC.value.optionValue;
-    console.log(this.selectedAnswer);
   }
 
   onRemove(i:any){if(i>0){
@@ -49,17 +47,14 @@ export class NewComponent implements OnInit {
 
   onSubmitForm(){
     this.submitCounter++;
-    console.log(this.questionForm.get('optionValueList'));
     if(this.questionForm.get('optionValueList').valid && !isNullOrUndefined(this.selectedAnswer)
         && this.questionForm.get('question').valid){
       this.helpBlock = true;
-      console.log((<FormArray>this.questionForm.get('optionValueList')).length);
       var question = this.questionForm.value.question;
       
       var options = [];
       var optionList = this.questionForm.value.optionValueList;
       for(var i=0; i<optionList.length; i++){
-        console.log(this.selectedAnswer+': '+optionList[i].optionValue);
         if(this.selectedAnswer===optionList[i].optionValue){
           options.push({
             oValue: optionList[i].optionValue,

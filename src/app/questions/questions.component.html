@@ -1,42 +1,39 @@
 
-<input class=" search-box pull-right" type="text" placeholder="Search" [(ngModel)]="filteredStatus" >
-
+    <input class=" search-box pull-right" type="text" placeholder="Search" [(ngModel)]="filteredStatus" >
     <button type="button" class="btn btn-primary" routerLink="new">Add Question</button>
     <hr>
-    
     <div class="panel panel-primary" *ngIf="pageLoad">
-            <div class="panel-heading clearfix">
-              <h4 class="panel-title pull-left">Questions</h4>
-              <div class="pull-right">
-                    <label>Sort: </label>
-                    <button type="button"  class="btn btn-default btn-xs" (click)="onSort()">{{sort}}</button>
-                    <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-              </div>
-            </div>
-    <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort | filter: filteredStatus">
-        <div class="panel-heading">{{question.num}}. {{question.question}} <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true" (click)=onEdit(question)></span></div>
-        <div class="panel-body">
-              <div *ngFor="let option of question.options">
-                <label><input type = "radio" disabled = "true" [value]="true" [(ngModel)]="option.isCorrect"> {{option.oValue}}</label>
+        <div class="panel-heading clearfix">
+            <h4 class="panel-title pull-left">Questions</h4>
+            <div class="pull-right">
+                <label>Sort: </label>
+                <button type="button"  class="btn btn-default btn-xs" (click)="onSort()">{{sort}}</button>
+                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
             </div>
         </div>
-      </div>
-      </div>
-
-      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-          <li [ngClass]="{disabled:pager.currentPage === 1}">
-              <a (click)="setPage(1)">First</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === 1}">
-              <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-          </li>
-          <li   *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-              <a id = "page-number" (click)="setPage(page)">{{page}}</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-              <a (click)="setPage(pager.currentPage + 1)">Next</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-              <a (click)="setPage(pager.totalPages)">Last</a>
-          </li>
-      </ul>
+        <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort | filter: filteredStatus">
+            <div class="panel-heading">{{question.num}}. {{question.question}} <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true" (click)=onEdit(question)></span></div>
+            <div class="panel-body">
+                <div *ngFor="let option of question.options">
+                    <label><input type = "radio" disabled = "true" [value]="true" [(ngModel)]="option.isCorrect"> {{option.oValue}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li   *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a id = "page-number" (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+    </ul>

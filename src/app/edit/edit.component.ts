@@ -22,10 +22,8 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     if(!isNullOrUndefined(this.server.question)){
-      console.log('this is executed');
     this.question = this.server.question;
     this.submitCounter = 0;
-    console.log('recieved: '+JSON.stringify(this.question.options));
       this.questionForm = new FormGroup({
         'question' : new FormControl(this.question.question, Validators.required),
         'optionValueList' : new FormArray([])
@@ -33,7 +31,6 @@ export class EditComponent implements OnInit {
         for(var k=0; k<this.question.options.length; k++){
           this.addOptionToArray(this.question.options[k]);
         }
-        console.log(this.questionForm);
       }
       else{
         this.router.navigate(['/']);
@@ -41,7 +38,6 @@ export class EditComponent implements OnInit {
   }
 
   onAddTextBox(){
-    console.log(this.questionForm.get('optionValueList'));
     const option = new FormGroup({
       optionSelect : new FormControl(null),
       optionValue : new FormControl(null)
@@ -67,7 +63,6 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.questionForm.get('optionValueList'));
     this.submitCounter++;
     if(this.questionForm.get('question').valid && 
     this.questionForm.get('optionValueList').valid){
@@ -94,11 +89,8 @@ export class EditComponent implements OnInit {
         question,
         options
       };
-      console.log(submitQuestion, id);
       this.server.submitEdit(submitQuestion, id).subscribe((resStatus)=>{
-        console.log('editcomponent'+resStatus);
           if(resStatus===200){
-            console.log('navigating to get page from edit');
             this.router.navigate(['/']);
           }
           

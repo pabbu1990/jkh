@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ServerService } from './server.service';
-import { HeaderComponent } from './header/header.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { NewComponent } from './new/new.component';
 import {RouterModule} from "@angular/router";
@@ -19,7 +18,6 @@ import { SortPipe } from './sort.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     QuestionsComponent,
     NewComponent,
     EditComponent,
