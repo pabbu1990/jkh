@@ -3,6 +3,7 @@
 }
 
 .pagination{
+    cursor: pointer;
     text-align: center;
     margin-left: 143px;
 }

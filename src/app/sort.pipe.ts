@@ -6,12 +6,12 @@ import {Question} from "./question.model";
 })
 export class SortPipe implements PipeTransform {
 
-  transform(array: Array<Question>, sortBy: String): Array<Question> {
+  transform(array: Array<Question>, sortType: string, sortBy: string): Array<Question> {
     array.sort((a: any, b: any) => {
-      if (a['num'] < b['num']) {
-        return (sortBy==='Desc') ? -1 : 1 ;
-      } else if (a['num'] > b['num']) {
-        return (sortBy==='Desc')? 1 : -1 ;
+      if (a[sortBy] < b[sortBy]) {
+        return (sortType==='Desc') ? -1 : 1 ;
+      } else if (a[sortBy] > b[sortBy]) {
+        return (sortType==='Desc')? 1 : -1 ;
       } else {
         return 0;
       }

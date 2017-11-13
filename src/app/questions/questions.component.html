@@ -11,14 +11,14 @@
                 <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
             </div>
         </div>
-        <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort | filter: filteredStatus">
+        <div class="panel panel-default" *ngFor="let question of pagedItems | sort: sort: 'num' | filter: filteredStatus">
             <div class="panel-heading">{{question.num}}. {{question.question}} <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true" (click)=onEdit(question)></span></div>
-            <div class="panel-body">
-                <div *ngFor="let option of question.options">
-                    <label><input type = "radio" disabled = "true" [value]="true" [(ngModel)]="option.isCorrect"> {{option.oValue}}</label>
+                <div class="panel-body">
+                    <div *ngFor="let option of question.options">
+                        <label><input type = "radio" disabled = "true" [value]="true" [(ngModel)]="option.isCorrect"> {{option.oValue}}</label>
+                    </div>
                 </div>
-            </div>
-        </div>
+        </div>      
     </div>
     <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">

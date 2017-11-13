@@ -15,13 +15,14 @@ export class ServerService {
     constructor(private http: Http, private router: Router) {}
     
     getQuestions() {
-      console.log('Get service called');
+      console.log('Get service called');     
         return this.http.get('https://sheltered-beyond-55362.herokuapp.com/questions')
           .map(
             (response: Response) => {
               console.log(response.json());
               const me = response.json();
               this.num = 1;
+              this.questions = [];
               for (let question of me) {
                 this.questions.push(new Question(
                     this.num,
