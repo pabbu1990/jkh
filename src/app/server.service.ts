@@ -19,7 +19,6 @@ export class ServerService {
         return this.http.get('https://sheltered-beyond-55362.herokuapp.com/questions')
           .map(
             (response: Response) => {
-              console.log(response.json());
               const me = response.json();
               this.num = 1;
               this.questions = [];
@@ -86,10 +85,8 @@ export class ServerService {
       }
 
       delete(id: any) {
-        console.log('server service id: '+id);
         return this.http.delete('https://sheltered-beyond-55362.herokuapp.com/delete/'+id, this.getHeader()).
         map((response: Response)=> {
-          console.log('service response: '+response.status);
           return response.status;
         })
           .catch(
