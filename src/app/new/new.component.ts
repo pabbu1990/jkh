@@ -45,6 +45,10 @@ export class NewComponent implements OnInit {
     }
   }
 
+  onReturn(){
+    this.router.navigate(['/']);
+  }
+
   onSubmitForm(){
     this.submitCounter++;
     if(this.questionForm.get('optionValueList').valid && !isNullOrUndefined(this.selectedAnswer)
@@ -72,8 +76,9 @@ export class NewComponent implements OnInit {
         question,
         options
       };
-      this.serverService.addQuestion(submitQues).subscribe();
-      this.router.navigate(['/']);
+      this.serverService.addQuestion(submitQues).subscribe(()=>{
+        this.router.navigate(['/']);
+      });
     }
   } 
 }

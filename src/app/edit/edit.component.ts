@@ -16,7 +16,7 @@ export class EditComponent implements OnInit {
   question: Question = null;;
   questionForm: FormGroup;
   submitCounter: number;
-  selectedAnswer: number;
+  selectedAnswer: String;
   helpBlock = false;
   constructor(private server: ServerService, private router: Router) { }
 
@@ -50,6 +50,10 @@ export class EditComponent implements OnInit {
       optionSelect : new FormControl(thisOption.isCorrect),
       optionValue : new FormControl(thisOption.oValue)
     });
+    if(option.value.optionSelect==true){
+        this.selectedAnswer = thisOption.oValue;
+    }
+    
    (<FormArray>this.questionForm.get('optionValueList')).push(option);
   }
 
@@ -60,6 +64,10 @@ export class EditComponent implements OnInit {
   onRemove(i:any){if(i>0){
     (<FormArray>this.questionForm.get('optionValueList')).removeAt(i);
     }
+  }
+
+  onReturn(){
+    this.router.navigate(['/']);
   }
 
   onSubmit(){
@@ -89,13 +97,9 @@ export class EditComponent implements OnInit {
         question,
         options
       };
-      this.server.submitEdit(submitQuestion, id).subscribe((resStatus)=>{
-          if(resStatus===200){
-            this.router.navigate(['/']);
-          }
-          
-      });
-      
+      this.server.submitEdit(submitQuestion, id).subscribe((status)=>{
+          this.router.navigate(['/']);
+      });    
     }
   }
 

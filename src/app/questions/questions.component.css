@@ -21,11 +21,16 @@
     margin-top: 6px;
 }
 
-.glyphicon.glyphicon-edit{
-    color: #337ab7;
-}
 .panel-title{
     padding-top: 7.2px;
+}
+
+#edit{
+    color: #337ab7;;
+}
+
+#delete{
+    color: red;
 }
 
 

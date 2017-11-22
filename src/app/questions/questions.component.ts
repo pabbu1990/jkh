@@ -34,7 +34,7 @@ export class QuestionsComponent implements OnInit {
   ngOnInit() {
 
     this.onGet();
-
+    this.serverService.getQ = this.onGet();
   }
 
   onGet() {
@@ -45,7 +45,6 @@ export class QuestionsComponent implements OnInit {
           this.questions = questions;
           this.allItems = questions;         
           this.setPage(1);
-          this.serverService.callService = false;
           this.pageLoad = true;
         }
       );
@@ -84,5 +83,13 @@ onEdit(ques: any){
   this.serverService.onEdit(ques);
 
   }
+
+  onDelete(ques: any){
+    this.questions.splice(ques.num-1, 1);
+    this.serverService.reOrderQuestions(this.onGet());
+    this.serverService.delete(ques.id).subscribe(()=>{
+    });
+
+    }
 
 }

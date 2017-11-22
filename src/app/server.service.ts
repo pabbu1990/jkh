@@ -11,11 +11,11 @@ export class ServerService {
     question: Question;
     callService:Boolean = true;
     num: number = 1;
+    getQ: any;
     header = new Headers({'Content-Type': 'application/json'});
     constructor(private http: Http, private router: Router) {}
     
-    getQuestions() {
-      console.log('Get service called');     
+    getQuestions() {   
         return this.http.get('https://sheltered-beyond-55362.herokuapp.com/questions')
           .map(
             (response: Response) => {
@@ -23,6 +23,7 @@ export class ServerService {
               const me = response.json();
               this.num = 1;
               this.questions = [];
+              this.callService = false;
               for (let question of me) {
                 this.questions.push(new Question(
                     this.num,
@@ -44,10 +45,13 @@ export class ServerService {
       }
 
       addQuestion(question: any) {
-        this.callService = true;
+        question.num = this.num;
+        this.questions.push(question);
+        this.getQ;
+        this.num++;
         return this.http.post('https://sheltered-beyond-55362.herokuapp.com/new', JSON.stringify(question), this.getHeader()).
         map((response: Response)=> {
-          return response;
+          return response.status;
         })
           .catch(
             (error: Response) => {
@@ -61,8 +65,16 @@ export class ServerService {
       }
 
       submitEdit(submQuestion: any, id: any) {
-        this.callService = true;
-        return this.http.put('https://sheltered-beyond-55362.herokuapp.com/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
+        for(var i=0; i<this.questions.length; i++){
+          if(this.question.id == this.questions[i].id){
+            this.questions[i].question = submQuestion.question;
+            this.questions[i].options = submQuestion.options;
+            break;
+          }
+
+        }
+        this.getQ;
+        return this.http.put('https://fullstackproject-cloned-kiranpabbu.c9users.io/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
         map((response: Response)=> {
           return response.status;
         })
@@ -73,10 +85,34 @@ export class ServerService {
           );
       }
 
+      delete(id: any) {
+        console.log('server service id: '+id);
+        return this.http.delete('https://fullstackproject-cloned-kiranpabbu.c9users.io/delete/'+id, this.getHeader()).
+        map((response: Response)=> {
+          console.log('service response: '+response.status);
+          return response.status;
+        })
+          .catch(
+            (error: Response) => {
+              return Observable.throw('Something went wrong. delete failed');
+            }
+          );
+      }
+
       getHeader(){
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions ({ headers: headers });
         return options;
+      }
+
+      reOrderQuestions(onGet){
+        this.num = 1;
+        for(var q=0; q<this.questions.length; q++){
+          this.questions[q].num = this.num;
+          this.num++;
+        }
+        onGet;
+
       }
 }
