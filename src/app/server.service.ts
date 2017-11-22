@@ -74,7 +74,7 @@ export class ServerService {
 
         }
         this.getQ;
-        return this.http.put('https://fullstackproject-cloned-kiranpabbu.c9users.io/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
+        return this.http.put('https://sheltered-beyond-55362.herokuapp.com/edit/'+id, JSON.stringify(submQuestion), this.getHeader()).
         map((response: Response)=> {
           return response.status;
         })
@@ -87,7 +87,7 @@ export class ServerService {
 
       delete(id: any) {
         console.log('server service id: '+id);
-        return this.http.delete('https://fullstackproject-cloned-kiranpabbu.c9users.io/delete/'+id, this.getHeader()).
+        return this.http.delete('https://sheltered-beyond-55362.herokuapp.com/delete/'+id, this.getHeader()).
         map((response: Response)=> {
           console.log('service response: '+response.status);
           return response.status;
